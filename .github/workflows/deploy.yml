@@ -1,4 +1,4 @@
-name: Build and Deploy NurseCalc Pro
+name: Build and Deploy NurseCalc Pro //used github actions as my ci/cd platform -> pipeline is define ad acode in the yml file. secrets stored in github. every push to main triggers a full build and deploy. The build runs on a clean ubunti environment
 
 on:
   push:
@@ -11,22 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code //checkouts the code
         uses: actions/checkout@v4
 
-      - name: Install Flutter
+      - name: Install Flutter //installs flutter on the server
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
+          flutter-version: '3.29.0'
           channel: 'stable'
 
-      - name: Install dependencies
+      - name: Install dependencies //downloads all your packages listed in pubspec.yaml
         run: flutter pub get
 
-      - name: Build Flutter web
+      - name: Build Flutter web //Compiles your Flutter app into HTML/CSS/JS file
         run: flutter build web --release
 
-      - name: Add Netlify redirects
+      - name: Add Netlify redirects //_redirects file inside the build folder. This tells Netlify to always serve index.html
         run: echo "/* /index.html 200" > build/web/_redirects
 
       - name: Deploy to Netlify
