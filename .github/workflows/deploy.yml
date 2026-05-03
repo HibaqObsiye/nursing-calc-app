@@ -17,7 +17,7 @@ jobs:
       - name: Install Flutter //installs flutter on the server
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.0'
+          flutter-version: '3.41.9'
           channel: 'stable'
 
       - name: Install dependencies //downloads all your packages listed in pubspec.yaml
